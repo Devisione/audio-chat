@@ -46,12 +46,8 @@ export const useStartPeerSession = (room, userMediaStream, localVideoRef, userNa
   }, [peerVideoConnection, room, userMediaStream, userName]);
 
   const cancelScreenSharing = async () => {
-    const senders = await peerVideoConnection.senders.filter((sender) => sender.track.kind === 'video');
-
-    if (senders) {
-      senders.forEach((sender) =>
-        sender.replaceTrack(userMediaStream.getTracks().find((track) => track.kind === 'video')),
-      );
+    for (const idPair of Object.keys(peerVideoConnection.peerConnections)) {
+      await peerVideoConnection.replaceStream(idPair, userMediaStream);
     }
 
     localVideoRef.current.srcObject = userMediaStream;
@@ -62,10 +58,8 @@ export const useStartPeerSession = (room, userMediaStream, localVideoRef, userNa
   const shareScreen = async () => {
     const stream = displayMediaStream || (await navigator.mediaDevices.getDisplayMedia());
 
-    const senders = await peerVideoConnection.senders.filter((sender) => sender.track.kind === 'video');
-
-    if (senders) {
-      senders.forEach((sender) => sender.replaceTrack(stream.getTracks()[0]));
+    for (const idPair of Object.keys(peerVideoConnection.peerConnections)) {
+      await peerVideoConnection.replaceStream(idPair, stream);
     }
 
     stream.getVideoTracks()[0].addEventListener('ended', () => {

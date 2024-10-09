@@ -111,6 +111,37 @@ class PeerConnectionSession {
     });
   }
 
+  // Новая функция для замены потока (с аудио на видео или наоборот)
+  async replaceStream(id, newStream) {
+    const peerConnection = this.peerConnections[id];
+    if (!peerConnection) {
+      throw new Error(`PeerConnection for user ${id} does not exist`);
+    }
+
+    // Заменяем или добавляем треки
+    newStream.getTracks().forEach((newTrack) => {
+      const sender = peerConnection.getSenders().find((s) => s.track?.kind === newTrack.kind);
+
+      if (sender) {
+        // Если трек уже есть такого типа (аудио или видео), просто заменяем его
+        sender.replaceTrack(newTrack);
+      } else {
+        // Если нет трека такого типа, добавляем новый
+        this.senders.push(peerConnection.addTrack(newTrack, newStream));
+      }
+    });
+
+    // Теперь делаем повторную сигнализацию
+    const offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+
+    // Отправляем новый offer через сокет на другой конец
+    this.socket.emit('call-user', {
+      offer,
+      to: id, // отправляем offer конкретному пользователю
+    });
+  }
+
   clearConnections() {
     this.socket.close();
     this.senders = [];

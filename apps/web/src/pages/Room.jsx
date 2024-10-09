@@ -10,7 +10,7 @@ export const Room = () => {
   const localVideoRef = useRef();
   const mainRef = useRef();
 
-  const userMediaStream = useCreateMediaStream(localVideoRef);
+  const { userMediaStream } = useCreateMediaStream(localVideoRef);
   const { connectedUsers, shareScreen, cancelScreenSharing, isScreenShared } = useStartPeerSession(
     room,
     userMediaStream,
