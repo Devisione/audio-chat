@@ -8,7 +8,7 @@ export const useStartPeerSession = (room, userMediaStream, localVideoRef, userNa
   const [connectedUsers, setConnectedUsers] = useState([]);
 
   useEffect(() => {
-    if (userMediaStream) {
+    if (userMediaStream && !peerVideoConnection.senders.length) {
       peerVideoConnection.joinRoom(room, userName);
       peerVideoConnection.onAddUser((user) => {
         console.log(user);
@@ -36,14 +36,16 @@ export const useStartPeerSession = (room, userMediaStream, localVideoRef, userNa
 
       peerVideoConnection.onAnswerMade((socket) => peerVideoConnection.callUser(socket));
     }
-
-    return () => {
-      if (userMediaStream) {
-        peerVideoConnection.clearConnections();
-        userMediaStream?.getTracks()?.forEach((track) => track.stop());
-      }
-    };
   }, [peerVideoConnection, room, userMediaStream, userName]);
+
+  useEffect(async () => {
+    const items = Object.keys(peerVideoConnection.peerConnections);
+    if (items.length > 0) {
+      for (const idPair of items) {
+        await peerVideoConnection.replaceStream(idPair, userMediaStream);
+      }
+    }
+  }, [userMediaStream]);
 
   const cancelScreenSharing = async () => {
     for (const idPair of Object.keys(peerVideoConnection.peerConnections)) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../atoms';
 
-export const VideoControls = ({ isScreenShared, onScreenShare, onToggleFullscreen }) => {
+export const VideoControls = ({ isScreenShared, onScreenShare, onToggleFullscreen, setVideo, setAudio, isAudio }) => {
   const [isFullscreen, setFullscreen] = useState(false);
 
   const handleToggleFullscreen = () => {
@@ -27,7 +27,10 @@ export const VideoControls = ({ isScreenShared, onScreenShare, onToggleFullscree
     >
       <div>
         <Button onClick={handleScreenShare}>{isScreenShared ? 'Cancel Sharing' : 'Share Screen'}</Button>
-        <Button onClick={handleToggleFullscreen}>{isFullscreen ? 'Exit Full Screen' : 'Full Screen'}</Button>;
+        <Button onClick={handleToggleFullscreen}>{isFullscreen ? 'Exit Full Screen' : 'Full Screen'}</Button>
+        {/*<Button onClick={isAudio ? setVideo : setAudio}>*/}
+        {/*  {isAudio ? 'Включить веб камеру' : 'Выключить веб камеру'}*/}
+        {/*</Button>*/}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useCreateMediaStream = (localVideoRef) => {
   const [userMediaStream, setUserMediaStream] = useState(null);
+  const [isAudio, setIsAudio] = useState(true);
 
   const setVideo = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -16,6 +17,7 @@ export const useCreateMediaStream = (localVideoRef) => {
     localVideoRef.current.srcObject = stream;
 
     setUserMediaStream(stream);
+    setIsAudio(false);
   }, []);
 
   const setAudio = useCallback(async () => {
@@ -26,11 +28,12 @@ export const useCreateMediaStream = (localVideoRef) => {
     localVideoRef.current.srcObject = stream;
 
     setUserMediaStream(stream);
+    setIsAudio(true);
   }, []);
 
   useEffect(() => {
     setAudio();
   }, [localVideoRef]);
 
-  return { userMediaStream, setVideo, setAudio };
+  return { userMediaStream, isAudio, setVideo, setAudio };
 };
