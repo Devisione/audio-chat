@@ -632,7 +632,7 @@
     webpack "5.4.0"
     webpack-node-externals "2.5.2"
 
-"@nestjs/common@^6.10.0 || ^7.0.0", "@nestjs/common@^7.0.0", "@nestjs/common@^7.5.1":
+"@nestjs/common@^6.0.0 || ^7.0.0 || ^8.0.0", "@nestjs/common@^6.10.0 || ^7.0.0", "@nestjs/common@^7.0.0", "@nestjs/common@^7.5.1":
   version "7.5.5"
   resolved "https://registry.npmjs.org/@nestjs/common/-/common-7.5.5.tgz"
   integrity sha512-dubDHjashfARGV8zhcANTsL5o0ZPm2xTB/BI12wgwTjCnM8WkaFqXpSCngqJyB3/XTFwllkP2g1ok6TwAZcSJw==
@@ -654,7 +654,7 @@
     lodash.set "4.3.2"
     uuid "8.3.1"
 
-"@nestjs/core@^7.0.0", "@nestjs/core@^7.5.1":
+"@nestjs/core@^6.0.0 || ^7.0.0 || ^8.0.0", "@nestjs/core@^7.0.0", "@nestjs/core@^7.5.1":
   version "7.5.5"
   resolved "https://registry.npmjs.org/@nestjs/core/-/core-7.5.5.tgz"
   integrity sha512-ktGOTgBSL8PoInLqcPWC8mPeCCHBaaEJX6LmzfbjHWCPRZqu96kiiQ1a245yTo/ifYrtaqQ7gAaHJpcszEAYwg==
@@ -695,6 +695,13 @@
     "@angular-devkit/schematics" "11.0.0"
     fs-extra "9.0.1"
     pluralize "8.0.0"
+
+"@nestjs/serve-static@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/@nestjs/serve-static/-/serve-static-2.2.2.tgz"
+  integrity sha512-3Mr+Q/npS3N7iGoF3Wd6Lj9QcjMGxbNrSqupi5cviM0IKrZ1BHl5qekW95rWYNATAVqoTmjGROAq+nKKpuUagQ==
+  dependencies:
+    path-to-regexp "0.1.7"
 
 "@nestjs/testing@^7.5.1":
   version "7.5.5"
@@ -4945,7 +4952,7 @@ path-parse@^1.0.6:
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz"
-  integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w= sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==
+  integrity sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==
 
 path-to-regexp@3.2.0:
   version "3.2.0"
