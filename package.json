@@ -1,6 +1,12 @@
 {
   "name": "audio-chat",
   "version": "1.0.0",
+  "private": true,
+  "directories": {
+    "server": "server",
+    "web": "web"
+  },
+  "workspaces": ["server", "web"],
   "scripts": {
     "build": "cd web && npm run build && cp build ../server/client  && cd ../server && npm run build",
     "start": "cd server && npm run start:prod"
