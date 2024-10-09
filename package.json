@@ -7,7 +7,7 @@
     "apps": "apps"
   },
   "scripts": {
-    "build": "cd apps/web && npm run build && cp build ../server/client  && cd ../server && npm run build",
+    "build": "cd apps/web && npm run build && cp -R build ../server/client && cd ../server && npm run build",
     "start": "cd apps/server && npm run start:prod"
   },
   "author": "",
