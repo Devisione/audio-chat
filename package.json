@@ -2,14 +2,13 @@
   "name": "audio-chat",
   "version": "1.0.0",
   "private": true,
+  "workspaces": ["apps/server", "apps/web"],
   "directories": {
-    "server": "server",
-    "web": "web"
+    "apps": "apps"
   },
-  "workspaces": ["server", "web"],
   "scripts": {
-    "build": "cd web && npm run build && cp build ../server/client  && cd ../server && npm run build",
-    "start": "cd server && npm run start:prod"
+    "build": "cd apps/web && npm run build && cp build ../server/client  && cd ../server && npm run build",
+    "start": "cd apps/server && npm run start:prod"
   },
   "author": "",
   "license": "ISC"
