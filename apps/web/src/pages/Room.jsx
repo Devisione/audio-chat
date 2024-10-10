@@ -10,7 +10,7 @@ export const Room = () => {
   const localVideoRef = useRef();
   const mainRef = useRef();
 
-  const { userMediaStream, setAudio, setVideo, isAudio } = useCreateMediaStream(localVideoRef);
+  const { userMediaStream, setAudio, setVideo, isAudio, muteUnmute, isMute } = useCreateMediaStream(localVideoRef);
   const { connectedUsers, shareScreen, cancelScreenSharing, isScreenShared } = useStartPeerSession(
     room,
     userMediaStream,
@@ -51,6 +51,8 @@ export const Room = () => {
           setAudio={setAudio}
           setVideo={setVideo}
           isAudio={isAudio}
+          muteUnmute={muteUnmute}
+          isMute={isMute}
         />
       </div>
     </div>

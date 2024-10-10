@@ -126,6 +126,9 @@ class PeerConnectionSession {
         // Если трек уже есть такого типа (аудио или видео), просто заменяем его
         sender.replaceTrack(newTrack);
       } else {
+        peerConnection.getSenders().forEach((sender) => {
+          peerConnection.removeTrack(sender);
+        });
         // Если нет трека такого типа, добавляем новый
         this.senders.push(peerConnection.addTrack(newTrack, newStream));
       }
