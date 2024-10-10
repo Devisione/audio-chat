@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Gallery, Header, LocalVideo, RemoteVideo, VideoControls } from '../components';
 import { useCalculateVideoLayout, useCreateMediaStream, useStartPeerSession } from '../hooks';
-import { toggleFullscreen } from '../utils/helpers';
 
 export const Room = () => {
   const { room, name } = useParams();
@@ -28,10 +27,6 @@ export const Room = () => {
     }
   }
 
-  function handleFullscreen(fullscreen) {
-    toggleFullscreen(fullscreen, mainRef.current);
-  }
-
   return (
     <div className="container">
       <Header title="WebRTC Example" />
@@ -47,7 +42,6 @@ export const Room = () => {
         <VideoControls
           isScreenShared={isScreenShared}
           onScreenShare={handleScreenSharing}
-          onToggleFullscreen={handleFullscreen}
           setAudio={setAudio}
           setVideo={setVideo}
           isAudio={isAudio}

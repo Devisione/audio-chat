@@ -3,6 +3,7 @@ import { useCalculateVoiceVolume } from '../../hooks';
 import { Video, VideoContainer, VoiceVisualizer } from '../atoms';
 
 export const RemoteVideo = (props) => {
+  const [isFullScreen, setScreenSize] = useState(false);
   const [mediaStream, setMediaStream] = useState();
 
   useCalculateVoiceVolume(mediaStream, props.id);
@@ -22,11 +23,18 @@ export const RemoteVideo = (props) => {
     };
   }, [props.id]);
 
+  const toggleSize = () => {
+    setScreenSize((size) => !size);
+  };
+
   return (
-    <VideoContainer>
+    <VideoContainer className={isFullScreen ? 'active' : ''}>
       <VoiceVisualizer id={props.id} />
       <Video {...props} />
       <div className="user-name">{props.userName}</div>
+      <div className="set-size" onClick={toggleSize}>
+        {isFullScreen ? '-' : '+'}
+      </div>
     </VideoContainer>
   );
 };
